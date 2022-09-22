@@ -24,10 +24,33 @@ def get_random_sentence(animals, adjectives, fruits):
 	return f"Aujourd’hui, j’ai vu un {animal} s’emparer d’un panier {adjectif} plein de {fruit}."
 
 def encrypt(text, shift):
-	return ""
+	code_secret=""
+	for n in range (len(text)):
+		if text[n].isalpha():
+			lettre = (text[n]).upper()
+			if (ord(lettre) + shift > 90):
+				lettre_code = chr(ord(lettre)-(26-shift))
+			else:
+				lettre_code = chr(ord(lettre)+shift)
+			code_secret += lettre_code
+		else:
+			code_secret += text[n]
+	return code_secret
 
 def decrypt(encrypted_text, shift):
-	return ""
+	message_ini = ""
+	for n in range(len(encrypted_text)):
+		if encrypted_text[n].isalpha():
+			lettre = (encrypted_text[n]).upper()
+			if (ord(lettre) - shift < 65):
+				lettre_code = chr(ord(lettre) + (26 - shift))
+			else:
+				lettre_code = chr(ord(lettre) - shift)
+			message_ini += lettre_code
+		else:
+			message_ini += encrypted_text[n]
+
+	return message_ini
 
 
 if __name__ == "__main__":
